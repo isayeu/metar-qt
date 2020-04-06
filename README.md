@@ -6,4 +6,6 @@ Dependencies
     python-metar
         https://github.com/python-metar/python-metar
 
-`pip install --user metar`
+or `pip install --user metar`
+
+PyQt5
