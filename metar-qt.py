@@ -24,7 +24,8 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.ui.getMETAR.clicked.connect(self.on_click)
 		self.ui.clearButton.clicked.connect(self.cl_clear)
 		self.ui.tableWidget.cellClicked.connect(self.decode)
-		
+		self.ui.tableWidget.setSortingEnabled(True)
+
 	def cl_clear(self):
 		self.ui.tableWidget.setRowCount(0)
 		self.ui.textBrowserDec.clear()
