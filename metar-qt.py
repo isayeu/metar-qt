@@ -84,7 +84,12 @@ class MainWindow(QtWidgets.QMainWindow):
 		if column != 2:
 			column = 2
 
-		line = self.ui.tableWidget.item(row, column).text()
+		try:
+			line = self.ui.tableWidget.item(row, column).text()
+		except AttributeError:
+			# skip empty contents
+			return
+
 		m = Metar.Metar(line)
 		self.ui.textBrowserDec.clear()
 		self.ui.textBrowserDec.append(m.string())
