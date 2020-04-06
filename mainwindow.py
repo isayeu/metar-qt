@@ -39,6 +39,9 @@ class Ui_MainWindow(object):
         
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setObjectName(u"lineEdit")
+        regex = QtCore.QRegExp("^[A-Za-z]{4}( [A-Za-z]{4})*")
+        validator = QtGui.QRegExpValidator(regex)
+        self.lineEdit.setValidator(validator)
         self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
                 
         self.getMETAR = QtWidgets.QPushButton(self.centralwidget)
