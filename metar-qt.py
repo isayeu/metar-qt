@@ -25,6 +25,7 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.ui.clearButton.clicked.connect(self.cl_clear)
 		self.ui.tableWidget.cellClicked.connect(self.decode)
 		self.ui.tableWidget.setSortingEnabled(True)
+		self.ui.lineEdit.returnPressed.connect(self.on_click)
 
 	def cl_clear(self):
 		self.ui.tableWidget.setRowCount(0)
