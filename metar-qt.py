@@ -34,6 +34,8 @@ class MainWindow(QtWidgets.QMainWindow):
 	def on_click(self):
 		apicao = self.ui.lineEdit.text().upper()
 		for ap in apicao.split(" "):
+			if len(ap) < 4:
+				continue
 			url = "%s/%s.TXT" % (BASE_URL, ap)
 			#print("trying to get", url)
 
