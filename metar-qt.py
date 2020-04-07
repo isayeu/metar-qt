@@ -63,10 +63,13 @@ class MainWindow(QtWidgets.QMainWindow):
 			#print("rows:", rows)
 			row = max(0, rows)
 
+			sorting_toggle = self.ui.tableWidget.isSortingEnabled()
+			self.ui.tableWidget.setSortingEnabled(False)
 			self.ui.tableWidget.insertRow(row)
 			self.ui.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(str(ap)))
 			self.ui.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(str(dt)))
 			self.ui.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(str(report)))
+			self.ui.tableWidget.setSortingEnabled(sorting_toggle)
 
 			self.ui.tableWidget.resizeColumnsToContents()
 
