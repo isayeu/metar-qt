@@ -8,9 +8,8 @@
 import datetime
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import *
-
-from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtWidgets import QWidget, QGridLayout, QTextBrowser, QLineEdit, QPushButton, QTabWidget, QTableWidget, QMenuBar, QMenu, QStatusBar, QAction
 
 class Ui_MainWindow(object):
 	def setupUi(self, MainWindow):
