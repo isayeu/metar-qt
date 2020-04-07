@@ -7,9 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 import datetime
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets 
 from PyQt5.QtCore import QCoreApplication
-from PyQt5.QtWidgets import QWidget, QGridLayout, QTextBrowser, QLineEdit, QPushButton, QTabWidget, QTableWidget, QMenuBar, QMenu, QStatusBar, QAction
+from PyQt5.QtWidgets import QWidget, QGridLayout, QTextBrowser, QLineEdit, QPushButton, QTabWidget, QTableWidget, QMenuBar, QMenu, QStatusBar, QAbstractItemView, QAction
 
 class Ui_MainWindow(object):
 	def setupUi(self, MainWindow):
@@ -58,6 +58,7 @@ class Ui_MainWindow(object):
 		self.tableWidget.horizontalHeader().setVisible(True)
 		self.tableWidget.verticalHeader().setVisible(False)
 		self.tableWidget.setHorizontalHeaderLabels([u"ICAO", u"TIME", u"METAR CODE"])
+		self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.gridLayout_2.addWidget(self.tableWidget, 0, 0, 1, 1)
 		self.tabWidget.addTab(self.tab_1, "")
 		#Tab_METAR_END
@@ -79,6 +80,7 @@ class Ui_MainWindow(object):
 		self.gridLayout_4.addWidget(self.tableWidget_3, 0, 0, 1, 1)
 		self.tabWidget.addTab(self.tab_3, "")
 		self.gridLayout.addWidget(self.tabWidget, 2, 0, 1, 1)
+	#Maintab_END
 
 		self.verticalLayout = QtWidgets.QVBoxLayout()
 		self.verticalLayout.setObjectName("verticalLayout")
