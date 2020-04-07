@@ -24,10 +24,6 @@ class Ui_MainWindow(object):
 		self.gridLayout.setObjectName(u"gridLayout")
 		self.gridLayout.setContentsMargins(10, 10, 10, 10)
 		
-		self.textBrowserDec = QTextBrowser(self.centralwidget)
-		self.textBrowserDec.setObjectName(u"textBrowserDec")
-		self.gridLayout.addWidget(self.textBrowserDec, 7, 0, 1, 1)
-		
 		self.lineEdit = QLineEdit(self.centralwidget)
 		self.lineEdit.setObjectName(u"lineEdit")
 		regex = QtCore.QRegExp("^[0-9A-Za-z]{4}( [0-9A-Za-z]{4})*")
@@ -42,6 +38,7 @@ class Ui_MainWindow(object):
 		self.clearButton = QPushButton(self.centralwidget)
 		self.clearButton.setObjectName(u"clearButton")
 		self.gridLayout.addWidget(self.clearButton, 0, 2, 1, 1)
+		
 	# Maintab
 		self.tabWidget = QTabWidget(self.centralwidget)
 		self.tabWidget.setObjectName(u"tabWidget")
@@ -61,16 +58,22 @@ class Ui_MainWindow(object):
 		self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 		self.gridLayout_2.addWidget(self.tableWidget, 0, 0, 1, 1)
 		self.tabWidget.addTab(self.tab_1, "")
-		#Tab_METAR_END
+		self.textBrowser = QtWidgets.QTextBrowser(self.tab_1)
+		self.textBrowser.setObjectName("textBrowser")
+		self.gridLayout_2.addWidget(self.textBrowser, 1, 0, 1, 1)
+		self.tabWidget.addTab(self.tab_1, "")
+        #Tab_METAR_END
 		
+		#Tab_TAF
 		self.tab_2 = QWidget()
 		self.tab_2.setObjectName(u"tab_2")
 		self.gridLayout_3 = QGridLayout(self.tab_2)
 		self.gridLayout_3.setObjectName(u"gridLayout_3")
-		self.tableWidget_2 = QTableWidget(self.tab_2)
-		self.tableWidget_2.setObjectName(u"tableWidget_2")
-		self.gridLayout_3.addWidget(self.tableWidget_2, 0, 0, 1, 1)
+		self.textBrowser_3 = QtWidgets.QTextBrowser(self.tab_2)
+		self.textBrowser_3.setObjectName("textBrowser_3")
+		self.gridLayout_3.addWidget(self.textBrowser_3, 1, 0, 1, 1)
 		self.tabWidget.addTab(self.tab_2, "")
+		#Tab_TAF_END
 		self.tab_3 = QWidget()
 		self.tab_3.setObjectName(u"tab_3")
 		self.gridLayout_4 = QGridLayout(self.tab_3)
@@ -84,6 +87,7 @@ class Ui_MainWindow(object):
 
 		self.verticalLayout = QtWidgets.QVBoxLayout()
 		self.verticalLayout.setObjectName("verticalLayout")
+		
 		self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
 		self.checkBox.setEnabled(True)
 		self.checkBox.setStatusTip("")
@@ -102,6 +106,7 @@ class Ui_MainWindow(object):
 		#WIP
 		self.checkBox.setChecked(True)
 		self.checkBox.setDisabled(True)
+		self.checkBox_2.setChecked(True)
 		self.checkBox_2.setDisabled(True)
 		self.checkBox_3.setDisabled(True)
 		#END_WIP

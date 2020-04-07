@@ -4,7 +4,10 @@ import sys
 from PyQt5 import QtWidgets
 import mainwindow
 
-from metar import Metar
+try:
+	from metar import Metar
+except:
+	pass
 
 try:
 	from urllib2 import urlopen
@@ -12,6 +15,7 @@ except:
 	from urllib.request import urlopen
 
 BASE_URL = "http://tgftp.nws.noaa.gov/data/observations/metar/stations"
+TAF_URL = "http://tgftp.nws.noaa.gov/data/forecasts/taf/stations"
 
 import metar
 
@@ -29,7 +33,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 	def cl_clear(self):
 		self.ui.tableWidget.setRowCount(0)
-		self.ui.textBrowserDec.clear()
+		self.ui.textBrowser.clear()
 
 
 	def on_click(self):
@@ -37,6 +41,7 @@ class MainWindow(QtWidgets.QMainWindow):
 		for ap in apicao.split(" "):
 			if len(ap) < 4:
 				continue
+			#METAR
 			url = "%s/%s.TXT" % (BASE_URL, ap)
 			#print("trying to get", url)
 
@@ -72,9 +77,31 @@ class MainWindow(QtWidgets.QMainWindow):
 			self.ui.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(str(dt)))
 			self.ui.tableWidget.setItem(row, 2, QtWidgets.QTableWidgetItem(str(report)))
 			self.ui.tableWidget.setSortingEnabled(sorting_toggle)
-
 			self.ui.tableWidget.resizeColumnsToContents()
-
+			
+			#TAF
+			taf_url = "%s/%s.TXT" % (TAF_URL, ap)
+			taf_lines = []
+			try:
+				taf_urlh = urlopen(taf_url)
+				
+				for taf_line in taf_urlh:
+					if not isinstance(taf_line, str):
+						taf_line = taf_line.decode()  # convert Python3 bytes buffer to string
+					taf_lines.append(taf_line.rstrip(" "))
+			except:
+				import traceback
+				print(traceback.format_exc())
+				print("Error retrieving", ap, "data", "\n")
+				continue
+			
+			dt = taf_lines[0]
+			report = " ".join(taf_lines[1:])
+			print(report)
+			self.ui.textBrowser_3.append(report)
+			
+			
+			
 			#try:
 			#	obs = Metar.Metar(report)
 			#	#print(obs.string())
@@ -96,9 +123,14 @@ class MainWindow(QtWidgets.QMainWindow):
 			# skip empty contents
 			return
 
+		self.ui.textBrowser.clear()
+		m = "NO MODULE: METAR"
+		if 'Metar' not in globals():
+			self.ui.textBrowser.append(m)
+			return
+
 		m = Metar.Metar(line)
-		self.ui.textBrowserDec.clear()
-		self.ui.textBrowserDec.append(m.string())
+		self.ui.textBrowser.append(m.string())
 		# end on_click()
 	# end class
 
