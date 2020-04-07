@@ -34,30 +34,31 @@ class MainWindow(QtWidgets.QMainWindow):
 	def on_click(self):
 		apicao = self.ui.lineEdit.text().upper()
 		for ap in apicao.split(" "):
+			if len(ap) < 4:
+				continue
 			url = "%s/%s.TXT" % (BASE_URL, ap)
 			#print("trying to get", url)
 
-			dt = ""
 			lines = []
 			try:
 				urlh = urlopen(url)
 				for line in urlh:
 					if not isinstance(line, str):
 						line = line.decode()  # convert Python3 bytes buffer to string
-					line = line.rstrip(" \r\n")
-			#		print("line:", line)
-					if line.startswith(ap):
-						lines.append(line)
-					else:
-						dt = line
+					lines.append(line.rstrip(" \r\n"))
 			except:
 				import traceback
-			#	print(traceback.format_exc())
-			#	print("Error retrieving", ap, "data", "\n")
+				print(traceback.format_exc())
+				print("Error retrieving", ap, "data", "\n")
+				continue
 
-			report = " ".join(lines)
+			dt = lines[0]
+			report = " ".join(lines[1:])
 			if len(report) < 4:
-			#	print("No data for ", ap, "\n\n")
+				print("No data for:", ap)
+				continue
+			if not report.startswith(ap):
+				print("ICAO name mismatch for %s: %s" % (ap, report[:4]))
 				continue
 			rows = self.ui.tableWidget.rowCount()
 			#print("rows:", rows)
